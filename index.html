@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulario de Muestreo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f0ebf8;
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+    }
+
+    .page-header {
+      max-width: 640px;
+      margin: 0 auto 12px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+      border-top: 10px solid #6741d9;
+    }
+
+    .header-content {
+      padding: 24px 24px 20px;
+    }
+
+    .header-content h1 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: #202124;
+      margin-bottom: 8px;
+    }
+
+    .header-content p {
+      font-size: 14px;
+      color: #444746;
+      line-height: 1.5;
+    }
+
+    .required-note {
+      font-size: 13px;
+      color: #c5221f;
+      margin-top: 10px;
+    }
+
+    .card {
+      max-width: 640px;
+      margin: 0 auto 12px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+      transition: box-shadow 0.2s;
+    }
+
+    .card:focus-within {
+      box-shadow: 0 2px 6px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.12);
+      border-left: 3px solid #6741d9;
+    }
+
+    .field-label {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 15px;
+      color: #202124;
+      font-weight: 500;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .field-label .req {
+      color: #c5221f;
+      margin-left: 3px;
+    }
+
+    .field-hint {
+      font-size: 13px;
+      color: #70757a;
+      margin-top: -10px;
+      margin-bottom: 14px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #80868b;
+      background: transparent;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      color: #202124;
+      padding: 8px 0 6px;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    input[type="date"]:focus,
+    select:focus,
+    textarea:focus {
+      border-bottom: 2px solid #6741d9;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.5;
+    }
+
+    select {
+      cursor: pointer;
+      padding-right: 24px;
+    }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::after {
+      content: '▾';
+      position: absolute;
+      right: 4px;
+      top: 8px;
+      color: #70757a;
+      pointer-events: none;
+      font-size: 14px;
+    }
+
+    .radio-group, .check-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .radio-item, .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .radio-item input[type="radio"],
+    .check-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #6741d9;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .radio-item label, .check-item label {
+      font-size: 14px;
+      color: #202124;
+      cursor: pointer;
+    }
+
+    .submit-section {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 0;
+    }
+
+    button[type="submit"] {
+      background: #6741d9;
+      color: #fff;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 24px;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.25px;
+    }
+
+    button[type="submit"]:hover {
+      background: #5733c2;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    button[type="submit"]:active {
+      background: #4a2aaa;
+    }
+
+    .clear-btn {
+      background: none;
+      border: none;
+      color: #6741d9;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 10px 8px;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+
+    .clear-btn:hover {
+      background: rgba(103,65,217,0.08);
+    }
+
+    .success-message {
+      display: none;
+      max-width: 640px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 40px 24px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+
+    .success-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .success-message h2 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 22px;
+      color: #202124;
+      margin-bottom: 10px;
+    }
+
+    .success-message p {
+      font-size: 14px;
+      color: #70757a;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e0e0e0;
+      margin: 16px 0;
+    }
+
+    @media (max-width: 480px) {
+      .header-content h1 { font-size: 22px; }
+      .card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1>Formulario de Muestreo</h1>
+      <p>Complete la siguiente información para el registro de muestreo y cadena de custodia. Una vez enviado, la información será recibida por el responsable.</p>
+      <p class="required-note">* Indica una pregunta obligatoria</p>
+    </div>
+  </div>
+
+  <form id="muestreoForm" action="https://formsubmit.co/jumpstyle2468@gmail.com" method="POST">
+
+    <!-- FormSubmit config -->
+    <input type="hidden" name="_subject" value="Nuevo Formulario de Muestreo recibido">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="">
+
+    <!-- Fecha de Muestreo -->
+    <div class="card">
+      <label class="field-label" for="fecha_muestreo">Fecha de Muestreo <span class="req">*</span></label>
+      <div class="input-wrap">
+        <input type="date" id="fecha_muestreo" name="Fecha de Muestreo" required />
+      </div>
+    </div>
+
+    <!-- Razón Social -->
+    <div class="card">
+      <label class="field-label" for="razon_social">Razón Social <span class="req">*</span></label>
+      <div class="input-wrap">
+        <input type="text" id="razon_social" name="Razón Social" placeholder="Nombre de la empresa o razón social" required />
+      </div>
+    </div>
+
+    <!-- Dirección -->
+    <div class="card">
+      <label class="field-label" for="direccion">Dirección <span class="req">*</span></label>
+      <div class="input-wrap">
+        <input type="text" id="direccion" name="Dirección" placeholder="Calle, número, colonia, ciudad" required />
+      </div>
+    </div>
+
+    <!-- Responsable -->
+    <div class="card">
+      <label class="field-label" for="responsable">Responsable <span class="req">*</span></label>
+      <div class="input-wrap">
+        <input type="text" id="responsable" name="Responsable" placeholder="Nombre completo del responsable" required />
+      </div>
+    </div>
+
+    <!-- Giro -->
+    <div class="card">
+      <label class="field-label" for="giro">Giro</label>
+      <div class="input-wrap">
+        <input type="text" id="giro" name="Giro" placeholder="Ej. Industrial, Comercial, Residencial…" />
+      </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="card">
+      <label class="field-label" for="telefono">Teléfono <span class="req">*</span></label>
+      <div class="input-wrap">
+        <input type="tel" id="telefono" name="Teléfono" placeholder="Ej. 8181234567" required />
+      </div>
+    </div>
+
+    <!-- Correo -->
+    <div class="card">
+      <label class="field-label" for="correo">Correo Electrónico <span class="req">*</span></label>
+      <div class="input-wrap">
+        <input type="email" id="correo" name="Correo Electrónico" placeholder="ejemplo@correo.com" required />
+      </div>
+    </div>
+
+    <!-- RFC -->
+    <div class="card">
+      <label class="field-label" for="rfc">RFC</label>
+      <div class="input-wrap">
+        <input type="text" id="rfc" name="RFC" placeholder="Ej. XAXX010101000" maxlength="13" style="text-transform:uppercase"/>
+      </div>
+    </div>
+
+    <!-- Uso de Suelo -->
+    <div class="card">
+      <label class="field-label">Uso de Suelo</label>
+      <div class="radio-group">
+        <label class="radio-item">
+          <input type="radio" name="Uso de Suelo" value="Habitacional" />
+          <label>Habitacional</label>
+        </label>
+        <label class="radio-item">
+          <input type="radio" name="Uso de Suelo" value="Comercial" />
+          <label>Comercial</label>
+        </label>
+        <label class="radio-item">
+          <input type="radio" name="Uso de Suelo" value="Industrial" />
+          <label>Industrial</label>
+        </label>
+        <label class="radio-item">
+          <input type="radio" name="Uso de Suelo" value="Agrícola" />
+          <label>Agrícola</label>
+        </label>
+        <label class="radio-item">
+          <input type="radio" name="Uso de Suelo" value="Mixto" />
+          <label>Mixto</label>
+        </label>
+        <label class="radio-item">
+          <input type="radio" name="Uso de Suelo" value="Otro" />
+          <label>Otro</label>
+        </label>
+      </div>
+    </div>
+
+    <!-- Necesidad del Estudio -->
+    <div class="card">
+      <label class="field-label">Necesidad del Estudio <span class="req">*</span></label>
+      <p class="field-hint">Selecciona todas las que apliquen</p>
+      <div class="check-group">
+        <label class="check-item">
+          <input type="checkbox" name="Necesidad del Estudio" value="Requerimiento de la Autoridad" />
+          <label>Requerimiento de la Autoridad</label>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="Necesidad del Estudio" value="Control Interno" />
+          <label>Control Interno</label>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="Necesidad del Estudio" value="Otros" />
+          <label>Otros</label>
+        </label>
+      </div>
+    </div>
+
+    <!-- Sitio de Muestreo / Cadena de Custodia -->
+    <div class="card">
+      <label class="field-label" for="sitio_muestreo">Sitio de Muestreo — Cadena de Custodia <span class="req">*</span></label>
+      <p class="field-hint">Describa el sitio de muestreo y los detalles relevantes para la cadena de custodia.</p>
+      <div class="input-wrap">
+        <textarea id="sitio_muestreo" name="Sitio de Muestreo (Cadena de Custodia)" placeholder="Describa el sitio, coordenadas, condiciones, observaciones…" required></textarea>
+      </div>
+    </div>
+
+    <!-- Observaciones adicionales -->
+    <div class="card">
+      <label class="field-label" for="observaciones">Observaciones Adicionales</label>
+      <div class="input-wrap">
+        <textarea id="observaciones" name="Observaciones Adicionales" placeholder="Cualquier información adicional relevante…"></textarea>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-section">
+      <button type="submit">Enviar</button>
+      <button type="reset" class="clear-btn">Borrar formulario</button>
+    </div>
+
+  </form>
+
+  <script>
+    // Uppercase RFC input
+    document.getElementById('rfc').addEventListener('input', function() {
+      this.value = this.value.toUpperCase();
+    });
+
+    // Set today's date as default
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('fecha_muestreo').value = today;
+
+    // After form submit, FormSubmit redirects; if staying on page, show success
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('sent') === '1') {
+      document.getElementById('muestreoForm').style.display = 'none';
+      document.querySelector('.submit-section').style.display = 'none';
+      document.querySelector('.page-header').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
