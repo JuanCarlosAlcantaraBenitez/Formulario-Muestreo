@@ -3,47 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulario de Muestreo</title>
+  <title>Formulario de Muestreo — NOVALABSA</title>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Roboto', sans-serif; background: #e8f4fd; min-height: 100vh; padding: 24px 16px 60px; }
+    body { font-family: "Roboto", sans-serif; background: #e8f4fd; min-height: 100vh; padding: 24px 16px 60px; }
     .logo-wrap { display: flex; justify-content: center; padding: 20px 24px 0; }
     .logo-wrap img { max-height: 80px; object-fit: contain; }
-    .page-header { max-width: 640px; margin: 0 auto 12px; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08); border-top: 10px solid #1a73e8; }
+    .page-header { max-width: 640px; margin: 0 auto 12px; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.12); border-top: 10px solid #1a73e8; }
     .header-content { padding: 24px 24px 20px; }
-    .header-content h1 { font-family: 'Google Sans', sans-serif; font-size: 28px; font-weight: 400; color: #202124; margin-bottom: 8px; }
+    .header-content h1 { font-family: "Google Sans", sans-serif; font-size: 28px; font-weight: 400; color: #202124; margin-bottom: 8px; }
     .header-content p { font-size: 14px; color: #444746; line-height: 1.5; }
     .required-note { font-size: 13px; color: #c5221f; margin-top: 10px; }
-    .card { max-width: 640px; margin: 0 auto 12px; background: #fff; border-radius: 8px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08); transition: box-shadow 0.2s; }
-    .card:focus-within { box-shadow: 0 2px 6px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.12); border-left: 3px solid #1a73e8; }
-    .field-label { font-family: 'Google Sans', sans-serif; font-size: 15px; color: #202124; font-weight: 500; margin-bottom: 16px; display: block; }
+    .card { max-width: 640px; margin: 0 auto 12px; background: #fff; border-radius: 8px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); transition: box-shadow 0.2s; }
+    .card:focus-within { box-shadow: 0 2px 6px rgba(0,0,0,0.16); border-left: 3px solid #1a73e8; }
+    .section-title { max-width: 640px; margin: 20px auto 8px; }
+    .section-title h2 { font-family: "Google Sans", sans-serif; font-size: 16px; font-weight: 600; color: #1a73e8; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 12px; background: #e8f0fe; border-radius: 6px; border-left: 4px solid #1a73e8; }
+    .field-label { font-family: "Google Sans", sans-serif; font-size: 15px; color: #202124; font-weight: 500; margin-bottom: 16px; display: block; }
     .field-label .req { color: #c5221f; margin-left: 3px; }
     .field-hint { font-size: 13px; color: #70757a; margin-top: -10px; margin-bottom: 14px; }
     .input-wrap { position: relative; }
-    input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
+    input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="number"], select, textarea {
       width: 100%; border: none; border-bottom: 1px solid #80868b; background: transparent;
-      font-family: 'Roboto', sans-serif; font-size: 14px; color: #202124; padding: 8px 0 6px;
+      font-family: "Roboto", sans-serif; font-size: 14px; color: #202124; padding: 8px 0 6px;
       outline: none; transition: border-color 0.2s; appearance: none; -webkit-appearance: none;
     }
     input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus,
-    input[type="date"]:focus, select:focus, textarea:focus { border-bottom: 2px solid #1a73e8; }
+    input[type="date"]:focus, input[type="number"]:focus, select:focus, textarea:focus { border-bottom: 2px solid #1a73e8; }
     textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+    .select-wrap { position: relative; }
+    .select-wrap::after { content: "▾"; position: absolute; right: 4px; top: 8px; color: #70757a; pointer-events: none; font-size: 14px; }
     .radio-group, .check-group { display: flex; flex-direction: column; gap: 12px; }
     .radio-item, .check-item { display: flex; align-items: center; gap: 12px; cursor: pointer; }
     .radio-item input[type="radio"], .check-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: #1a73e8; cursor: pointer; flex-shrink: 0; }
     .radio-item label, .check-item label { font-size: 14px; color: #202124; cursor: pointer; }
+    .hidden { display: none; }
+    .matrix-selector { max-width: 640px; margin: 0 auto 16px; background: #fff; border-radius: 8px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); border-left: 4px solid #1a73e8; }
+    .matrix-selector .field-label { font-size: 17px; margin-bottom: 20px; }
+    .matrix-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .matrix-btn { flex: 1; min-width: 140px; padding: 14px 12px; border: 2px solid #dadce0; border-radius: 8px; background: #fff; cursor: pointer; font-family: "Google Sans", sans-serif; font-size: 15px; font-weight: 500; color: #444746; text-align: center; transition: all 0.2s; }
+    .matrix-btn:hover { border-color: #1a73e8; color: #1a73e8; background: #e8f0fe; }
+    .matrix-btn.active { border-color: #1a73e8; color: #fff; background: #1a73e8; }
+    .matrix-btn .icon { font-size: 22px; display: block; margin-bottom: 4px; }
     .submit-section { max-width: 640px; margin: 0 auto; display: flex; align-items: center; gap: 16px; padding: 8px 0; }
-    button[type="submit"] { background: #1a73e8; color: #fff; font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 500; border: none; border-radius: 4px; padding: 10px 24px; cursor: pointer; transition: background 0.2s, box-shadow 0.2s; letter-spacing: 0.25px; }
+    button[type="submit"] { background: #1a73e8; color: #fff; font-family: "Google Sans", sans-serif; font-size: 14px; font-weight: 500; border: none; border-radius: 4px; padding: 10px 24px; cursor: pointer; transition: background 0.2s, box-shadow 0.2s; }
     button[type="submit"]:hover { background: #1557b0; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-    button[type="submit"]:active { background: #0d47a1; }
     button[type="submit"]:disabled { background: #aaa; cursor: not-allowed; }
-    .clear-btn { background: none; border: none; color: #1a73e8; font-family: 'Google Sans', sans-serif; font-size: 14px; cursor: pointer; padding: 10px 8px; border-radius: 4px; transition: background 0.15s; }
+    .clear-btn { background: none; border: none; color: #1a73e8; font-family: "Google Sans", sans-serif; font-size: 14px; cursor: pointer; padding: 10px 8px; border-radius: 4px; }
     .clear-btn:hover { background: rgba(26,115,232,0.08); }
     .success-card { display: none; max-width: 640px; margin: 0 auto; background: #fff; border-radius: 8px; padding: 40px 24px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
-    .success-card h2 { font-family: 'Google Sans', sans-serif; font-size: 22px; color: #202124; margin-bottom: 10px; }
+    .success-card h2 { font-family: "Google Sans", sans-serif; font-size: 22px; color: #202124; margin-bottom: 10px; }
     .success-card p { font-size: 14px; color: #70757a; }
-    @media (max-width: 480px) { .header-content h1 { font-size: 22px; } .card { padding: 18px; } }
+    @media (max-width: 480px) { .header-content h1 { font-size: 22px; } .card { padding: 18px; } .matrix-btn { min-width: 100%; } }
   </style>
 </head>
 <body>
@@ -60,93 +71,248 @@
   </div>
 
   <form id="muestreoForm">
-
     <input type="hidden" name="access_key" value="47863d6d-8a71-4e79-9546-9a562a19d642">
     <input type="hidden" name="subject" value="Nuevo Formulario de Muestreo recibido">
     <input type="hidden" name="from_name" value="Formulario NOVALABSA">
+    <input type="hidden" name="cc" value="kiaraixchel119@gmail.com">
+    <input type="hidden" id="matrizInput" name="Matriz" value="">
 
-
-    <div class="card">
-      <label class="field-label" for="fecha_muestreo">Fecha de Muestreo <span class="req">*</span></label>
-      <div class="input-wrap"><input type="date" id="fecha_muestreo" name="Fecha de Muestreo" required /></div>
-    </div>
-
-    <div class="card">
-      <label class="field-label" for="razon_social">Razón Social <span class="req">*</span></label>
-      <div class="input-wrap"><input type="text" id="razon_social" name="Razón Social" placeholder="Nombre de la empresa o razón social" required /></div>
-    </div>
-
-    <div class="card">
-      <label class="field-label" for="direccion">Dirección <span class="req">*</span></label>
-      <div class="input-wrap"><input type="text" id="direccion" name="Dirección" placeholder="Calle, número, colonia, ciudad" required /></div>
-    </div>
-
-    <div class="card">
-      <label class="field-label" for="responsable">Responsable <span class="req">*</span></label>
-      <div class="input-wrap"><input type="text" id="responsable" name="Responsable" placeholder="Nombre completo del responsable" required /></div>
-    </div>
-
-    <div class="card">
-      <label class="field-label" for="giro">Giro</label>
-      <div class="input-wrap"><input type="text" id="giro" name="Giro" placeholder="Ej. Industrial, Comercial, Residencial…" /></div>
-    </div>
-
-    <div class="card">
-      <label class="field-label" for="telefono">Teléfono <span class="req">*</span></label>
-      <div class="input-wrap"><input type="tel" id="telefono" name="Teléfono" placeholder="Ej. 8181234567" required /></div>
-    </div>
-
-    <div class="card">
-      <label class="field-label" for="correo">Correo Electrónico <span class="req">*</span></label>
-      <div class="input-wrap"><input type="email" id="correo" name="email" placeholder="ejemplo@correo.com" required /></div>
-    </div>
-
-    <div class="card">
-      <label class="field-label" for="rfc">RFC</label>
-      <div class="input-wrap"><input type="text" id="rfc" name="RFC" placeholder="Ej. XAXX010101000" maxlength="13" style="text-transform:uppercase"/></div>
-    </div>
-
-    <div class="card">
-      <label class="field-label">Uso de Suelo</label>
-      <div class="radio-group">
-        <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Habitacional" /><label>Habitacional</label></label>
-        <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Comercial" /><label>Comercial</label></label>
-        <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Industrial" /><label>Industrial</label></label>
-        <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Agrícola" /><label>Agrícola</label></label>
-        <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Mixto" /><label>Mixto</label></label>
-        <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Otro" /><label>Otro</label></label>
+    <!-- ── SELECTOR DE MATRIZ ── -->
+    <div class="matrix-selector">
+      <label class="field-label">Selecciona la Matriz de Muestreo <span class="req">*</span></label>
+      <div class="matrix-buttons">
+        <button type="button" class="matrix-btn" data-matrix="suelos" onclick="selectMatrix(this)">
+          <span class="icon">🟤</span>Suelos
+        </button>
+        <button type="button" class="matrix-btn" data-matrix="aguas" onclick="selectMatrix(this)">
+          <span class="icon">💧</span>Aguas
+        </button>
+        <button type="button" class="matrix-btn" data-matrix="ambiente" onclick="selectMatrix(this)">
+          <span class="icon">🏭</span>Ambiente Laboral
+        </button>
       </div>
     </div>
 
-    <div class="card">
-      <label class="field-label">Necesidad del Estudio <span class="req">*</span></label>
-      <p class="field-hint">Selecciona todas las que apliquen</p>
-      <div class="check-group">
-        <label class="check-item"><input type="checkbox" name="Necesidad del Estudio" value="Requerimiento de la Autoridad" /><label>Requerimiento de la Autoridad</label></label>
-        <label class="check-item"><input type="checkbox" name="Necesidad del Estudio" value="Control Interno" /><label>Control Interno</label></label>
-        <label class="check-item"><input type="checkbox" name="Necesidad del Estudio" value="Otros" /><label>Otros</label></label>
+    <!-- ══════════════════════════════════ -->
+    <!-- CAMPOS COMUNES (siempre visibles) -->
+    <!-- ══════════════════════════════════ -->
+    <div id="camposComunes" class="hidden">
+
+      <div class="section-title"><h2>📋 Datos Generales</h2></div>
+
+      <div class="card">
+        <label class="field-label" for="fecha_muestreo">Fecha de Muestreo <span class="req">*</span></label>
+        <div class="input-wrap"><input type="date" id="fecha_muestreo" name="Fecha de Muestreo" required /></div>
       </div>
-    </div>
 
-    <div class="card">
-      <label class="field-label" for="sitio_muestreo">Sitio de Muestreo — Cadena de Custodia <span class="req">*</span></label>
-      <p class="field-hint">Describa el sitio de muestreo y los detalles relevantes para la cadena de custodia.</p>
-      <div class="input-wrap"><textarea id="sitio_muestreo" name="Sitio de Muestreo (Cadena de Custodia)" placeholder="Describa el sitio, coordenadas, condiciones, observaciones…" required></textarea></div>
-    </div>
+      <div class="card">
+        <label class="field-label" for="razon_social">Razón Social <span class="req">*</span></label>
+        <div class="input-wrap"><input type="text" id="razon_social" name="Razón Social" placeholder="Nombre de la empresa o razón social" required /></div>
+      </div>
 
-    <div class="card">
-      <label class="field-label" for="area_suelo">Área de Suelo a Muestrear</label>
-      <div class="input-wrap"><input type="text" id="area_suelo" name="Área de Suelo a Muestrear" placeholder="Ej. 500 m², 1 hectárea…" /></div>
-    </div>
+      <div class="card">
+        <label class="field-label" for="direccion">Dirección <span class="req">*</span></label>
+        <div class="input-wrap"><input type="text" id="direccion" name="Dirección" placeholder="Calle, número, colonia, ciudad" required /></div>
+      </div>
 
-    <div class="card">
-      <label class="field-label" for="observaciones">Observaciones Adicionales</label>
-      <div class="input-wrap"><textarea id="observaciones" name="Observaciones Adicionales" placeholder="Cualquier información adicional relevante…"></textarea></div>
-    </div>
+      <div class="card">
+        <label class="field-label" for="responsable">Responsable <span class="req">*</span></label>
+        <div class="input-wrap"><input type="text" id="responsable" name="Responsable" placeholder="Nombre completo del responsable" required /></div>
+      </div>
 
-    <div class="submit-section">
+      <div class="card">
+        <label class="field-label" for="giro">Giro</label>
+        <div class="input-wrap"><input type="text" id="giro" name="Giro" placeholder="Ej. Industrial, Comercial, Residencial…" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="telefono">Teléfono <span class="req">*</span></label>
+        <div class="input-wrap"><input type="tel" id="telefono" name="Teléfono" placeholder="Ej. 7221234567" required /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="correo">Correo Electrónico <span class="req">*</span></label>
+        <div class="input-wrap"><input type="email" id="correo" name="email" placeholder="ejemplo@correo.com" required /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="rfc">RFC</label>
+        <div class="input-wrap"><input type="text" id="rfc" name="RFC" placeholder="Ej. XAXX010101000" maxlength="13" style="text-transform:uppercase"/></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label">Necesidad del Estudio <span class="req">*</span></label>
+        <p class="field-hint">Selecciona todas las que apliquen</p>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" name="Necesidad del Estudio" value="Requerimiento de la Autoridad" /><label>Requerimiento de la Autoridad</label></label>
+          <label class="check-item"><input type="checkbox" name="Necesidad del Estudio" value="Control Interno" /><label>Control Interno</label></label>
+          <label class="check-item"><input type="checkbox" name="Necesidad del Estudio" value="Otros" /><label>Otros</label></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="sitio_muestreo">Sitio de Muestreo — Cadena de Custodia <span class="req">*</span></label>
+        <p class="field-hint">Describa el sitio de muestreo y los detalles relevantes.</p>
+        <div class="input-wrap"><textarea id="sitio_muestreo" name="Sitio de Muestreo (Cadena de Custodia)" placeholder="Describa el sitio, coordenadas, condiciones, observaciones…" required></textarea></div>
+      </div>
+
+    </div><!-- /camposComunes -->
+
+
+    <!-- ══════════════════ -->
+    <!-- SECCIÓN: SUELOS   -->
+    <!-- ══════════════════ -->
+    <div id="seccionSuelos" class="hidden">
+      <div class="section-title"><h2>🟤 Datos de Suelos</h2></div>
+
+      <div class="card">
+        <label class="field-label">Uso de Suelo</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Habitacional" /><label>Habitacional</label></label>
+          <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Comercial" /><label>Comercial</label></label>
+          <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Industrial" /><label>Industrial</label></label>
+          <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Agrícola" /><label>Agrícola</label></label>
+          <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Mixto" /><label>Mixto</label></label>
+          <label class="radio-item"><input type="radio" name="Uso de Suelo" value="Otro" /><label>Otro</label></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="area_suelo">Área de Suelo a Muestrear</label>
+        <div class="input-wrap"><input type="text" id="area_suelo" name="Área de Suelo a Muestrear" placeholder="Ej. 500 m², 1 hectárea…" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="obs_suelos">Observaciones Adicionales</label>
+        <div class="input-wrap"><textarea id="obs_suelos" name="Observaciones (Suelos)" placeholder="Cualquier información adicional relevante…"></textarea></div>
+      </div>
+    </div><!-- /seccionSuelos -->
+
+
+    <!-- ══════════════════ -->
+    <!-- SECCIÓN: AGUAS    -->
+    <!-- ══════════════════ -->
+    <div id="seccionAguas" class="hidden">
+      <div class="section-title"><h2>💧 Datos de Aguas</h2></div>
+
+      <div class="card">
+        <label class="field-label" for="normativa_aguas">Normativa Aplicable <span class="req">*</span></label>
+        <div class="select-wrap">
+          <select id="normativa_aguas" name="Normativa Aplicable (Aguas)" onchange="toggleOtraNormativa(this.value)">
+            <option value="" disabled selected>Selecciona una normativa</option>
+            <option value="NOM-001-SEMARNAT-2021">NOM-001-SEMARNAT-2021</option>
+            <option value="NOM-001-SEMARNAT-1996">NOM-001-SEMARNAT-1996</option>
+            <option value="NOM-002-SEMARNAT-1996">NOM-002-SEMARNAT-1996</option>
+            <option value="NOM-003-SEMARNAT-1997">NOM-003-SEMARNAT-1997</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card hidden" id="cardOtraNormativa">
+        <label class="field-label" for="otra_normativa">Especifique la Normativa</label>
+        <div class="input-wrap"><input type="text" id="otra_normativa" name="Otra Normativa (Aguas)" placeholder="Escribe la normativa aplicable…" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="punto_muestreo">Punto de Toma de Muestra <span class="req">*</span></label>
+        <p class="field-hint">Ej. registro, tubería, río, pozo, carcamo…</p>
+        <div class="input-wrap"><input type="text" id="punto_muestreo" name="Punto de Toma de Muestra" placeholder="Describa el punto de muestreo…" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="num_muestras">Cantidad de Muestras / Descargas</label>
+        <div class="input-wrap"><input type="number" id="num_muestras" name="Cantidad de Muestras o Descargas" min="1" placeholder="Ej. 3" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="parametros_aguas">Parámetros a Analizar <span class="req">*</span></label>
+        <div class="select-wrap">
+          <select id="parametros_aguas" name="Parámetros a Analizar (Norma)">
+            <option value="" disabled selected>Selecciona norma de parámetros</option>
+            <option value="NOM-001-SEMARNAT-2021">NOM-001-SEMARNAT-2021</option>
+            <option value="NOM-001-SEMARNAT-1996">NOM-001-SEMARNAT-1996</option>
+            <option value="NOM-002-SEMARNAT-1996">NOM-002-SEMARNAT-1996</option>
+            <option value="NOM-003-SEMARNAT-1997">NOM-003-SEMARNAT-1997</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="parametros_adicionales">Parámetros Adicionales</label>
+        <p class="field-hint">Especifica cualquier parámetro adicional que requieras analizar.</p>
+        <div class="input-wrap"><textarea id="parametros_adicionales" name="Parámetros Adicionales (Aguas)" placeholder="Ej. metales pesados, coliformes, DBO, DQO…"></textarea></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="obs_aguas">Observaciones Adicionales</label>
+        <div class="input-wrap"><textarea id="obs_aguas" name="Observaciones (Aguas)" placeholder="Cualquier información adicional relevante…"></textarea></div>
+      </div>
+    </div><!-- /seccionAguas -->
+
+
+    <!-- ════════════════════════ -->
+    <!-- SECCIÓN: AMBIENTE LABORAL -->
+    <!-- ════════════════════════ -->
+    <div id="seccionAmbiente" class="hidden">
+      <div class="section-title"><h2>🏭 Datos de Ambiente Laboral</h2></div>
+
+      <div class="card">
+        <label class="field-label">Norma(s) Aplicable(s) <span class="req">*</span></label>
+        <p class="field-hint">Puedes seleccionar una o más normas.</p>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" name="Norma Ambiente Laboral" value="NOM-011-STPS-2001 (Ruido)" /><label>NOM-011-STPS-2001 — Ruido</label></label>
+          <label class="check-item"><input type="checkbox" name="Norma Ambiente Laboral" value="NOM-025-STPS-2008 (Iluminación)" /><label>NOM-025-STPS-2008 — Iluminación</label></label>
+          <label class="check-item"><input type="checkbox" name="Norma Ambiente Laboral" value="NOM-015-STPS-2001 (Temperatura)" /><label>NOM-015-STPS-2001 — Temperatura y Estrés Térmico</label></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="area_trabajo">Área o Puesto de Trabajo <span class="req">*</span></label>
+        <div class="input-wrap"><input type="text" id="area_trabajo" name="Área o Puesto de Trabajo" placeholder="Ej. Producción, Almacén, Oficinas…" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="num_trabajadores">Número de Trabajadores Expuestos / Total</label>
+        <div class="input-wrap"><input type="text" id="num_trabajadores" name="Número de Trabajadores" placeholder="Ej. 15 expuestos / 40 total" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label">Turno(s) de Trabajo <span class="req">*</span></label>
+        <p class="field-hint">Selecciona los turnos aplicables e indica el horario de cada uno.</p>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" name="Turno" value="Matutino" id="chkMatutino" onchange="toggleHorario('horarioMatutino',this.checked)" /><label>Matutino</label></label>
+          <div id="horarioMatutino" class="hidden" style="margin-left:30px;margin-top:-4px;">
+            <input type="text" name="Horario Matutino" placeholder="Ej. 06:00 – 14:00" style="max-width:220px;" />
+          </div>
+          <label class="check-item"><input type="checkbox" name="Turno" value="Vespertino" id="chkVespertino" onchange="toggleHorario('horarioVespertino',this.checked)" /><label>Vespertino</label></label>
+          <div id="horarioVespertino" class="hidden" style="margin-left:30px;margin-top:-4px;">
+            <input type="text" name="Horario Vespertino" placeholder="Ej. 14:00 – 22:00" style="max-width:220px;" />
+          </div>
+          <label class="check-item"><input type="checkbox" name="Turno" value="Nocturno" id="chkNocturno" onchange="toggleHorario('horarioNocturno',this.checked)" /><label>Nocturno</label></label>
+          <div id="horarioNocturno" class="hidden" style="margin-left:30px;margin-top:-4px;">
+            <input type="text" name="Horario Nocturno" placeholder="Ej. 22:00 – 06:00" style="max-width:220px;" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="num_puntos">Número de Puntos a Medir</label>
+        <p class="field-hint">Si lo conoces, indícalo. De lo contrario, el signatario los determinará en campo.</p>
+        <div class="input-wrap"><input type="text" id="num_puntos" name="Número de Puntos a Medir" placeholder="Ej. 10 puntos — o dejar en blanco para que el signatario determine" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="obs_ambiente">Observaciones Específicas</label>
+        <div class="input-wrap"><textarea id="obs_ambiente" name="Observaciones (Ambiente Laboral)" placeholder="Condiciones especiales, áreas de difícil acceso, restricciones de horario…"></textarea></div>
+      </div>
+    </div><!-- /seccionAmbiente -->
+
+
+    <!-- Botones de envío (ocultos hasta elegir matriz) -->
+    <div class="submit-section hidden" id="submitSection">
       <button type="submit" id="submitBtn">Enviar</button>
-      <button type="reset" class="clear-btn">Borrar formulario</button>
+      <button type="button" class="clear-btn" onclick="resetForm()">Borrar formulario</button>
     </div>
 
   </form>
@@ -158,51 +324,104 @@
   </div>
 
   <script>
-    document.getElementById('rfc').addEventListener('input', function() {
+    // Set today date
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("fecha_muestreo") && (document.getElementById("fecha_muestreo").value = today);
+
+    // RFC uppercase
+    document.getElementById("rfc").addEventListener("input", function() {
       this.value = this.value.toUpperCase();
     });
 
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('fecha_muestreo').value = today;
+    // Matrix selection
+    function selectMatrix(btn) {
+      document.querySelectorAll(".matrix-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const matrix = btn.dataset.matrix;
+      document.getElementById("matrizInput").value = matrix === "suelos" ? "Suelos" : matrix === "aguas" ? "Aguas" : "Ambiente Laboral";
 
-    document.getElementById('muestreoForm').addEventListener('submit', async function(e) {
+      // Show common fields
+      document.getElementById("camposComunes").classList.remove("hidden");
+
+      // Hide all sections first
+      ["seccionSuelos","seccionAguas","seccionAmbiente"].forEach(id => {
+        document.getElementById(id).classList.add("hidden");
+      });
+
+      // Show selected section
+      if (matrix === "suelos") document.getElementById("seccionSuelos").classList.remove("hidden");
+      if (matrix === "aguas")  document.getElementById("seccionAguas").classList.remove("hidden");
+      if (matrix === "ambiente") document.getElementById("seccionAmbiente").classList.remove("hidden");
+
+      // Show submit
+      document.getElementById("submitSection").classList.remove("hidden");
+
+      // Update date
+      document.getElementById("fecha_muestreo").value = today;
+    }
+
+    // Toggle "Otra normativa" field
+    function toggleOtraNormativa(val) {
+      const card = document.getElementById("cardOtraNormativa");
+      if (val === "Otro") { card.classList.remove("hidden"); }
+      else { card.classList.add("hidden"); }
+    }
+
+    // Toggle turno horario fields
+    function toggleHorario(id, show) {
+      const el = document.getElementById(id);
+      if (show) el.classList.remove("hidden");
+      else el.classList.add("hidden");
+    }
+
+    // Reset form
+    function resetForm() {
+      document.getElementById("muestreoForm").reset();
+      document.querySelectorAll(".matrix-btn").forEach(b => b.classList.remove("active"));
+      document.getElementById("camposComunes").classList.add("hidden");
+      ["seccionSuelos","seccionAguas","seccionAmbiente"].forEach(id => document.getElementById(id).classList.add("hidden"));
+      document.getElementById("submitSection").classList.add("hidden");
+      document.getElementById("cardOtraNormativa").classList.add("hidden");
+      ["horarioMatutino","horarioVespertino","horarioNocturno"].forEach(id => document.getElementById(id).classList.add("hidden"));
+      document.getElementById("matrizInput").value = "";
+    }
+
+    // Submit
+    document.getElementById("muestreoForm").addEventListener("submit", async function(e) {
       e.preventDefault();
-      const form = e.target;
-      const btn = document.getElementById('submitBtn');
-      btn.textContent = 'Enviando…';
+      if (!document.getElementById("matrizInput").value) {
+        alert("Por favor selecciona una matriz de muestreo.");
+        return;
+      }
+      const btn = document.getElementById("submitBtn");
+      btn.textContent = "Enviando…";
       btn.disabled = true;
 
-      const formData = new FormData(form);
+      const formData = new FormData(e.target);
       const object = {};
       formData.forEach((value, key) => {
-        if (object[key]) {
-          object[key] = object[key] + ', ' + value;
-        } else {
-          object[key] = value;
-        }
+        if (!value) return;
+        if (object[key]) { object[key] = object[key] + ", " + value; }
+        else { object[key] = value; }
       });
-      const json = JSON.stringify(object);
 
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: json
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(object)
         });
         const result = await res.json();
         if (result.success) {
-          form.style.display = 'none';
-          document.querySelector('.submit-section').style.display = 'none';
-          document.getElementById('successCard').style.display = 'block';
+          e.target.style.display = "none";
+          document.getElementById("successCard").style.display = "block";
         } else {
-          btn.textContent = 'Enviar';
-          btn.disabled = false;
-          alert('Error al enviar: ' + (result.message || 'Intenta de nuevo.'));
+          btn.textContent = "Enviar"; btn.disabled = false;
+          alert("Error al enviar: " + (result.message || "Intenta de nuevo."));
         }
       } catch(err) {
-        btn.textContent = 'Enviar';
-        btn.disabled = false;
-        alert('Error de conexión. Verifica tu internet e intenta de nuevo.');
+        btn.textContent = "Enviar"; btn.disabled = false;
+        alert("Error de conexión. Verifica tu internet e intenta de nuevo.");
       }
     });
   </script>
