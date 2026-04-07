@@ -183,6 +183,30 @@
       </div>
 
       <div class="card">
+        <label class="field-label" for="num_puntos_suelo">Número de Puntos de Muestreo</label>
+        <p class="field-hint">Si lo conoces, indícalo. De lo contrario el signatario los determinará en campo.</p>
+        <div class="input-wrap"><input type="text" id="num_puntos_suelo" name="Número de Puntos de Muestreo (Suelos)" placeholder="Ej. 5 puntos — o dejar en blanco para que el signatario determine" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="num_muestras_suelo">Número de Muestras + Duplicados</label>
+        <p class="field-hint">Indica la cantidad total de muestras y duplicados requeridos.</p>
+        <div class="input-wrap"><input type="text" id="num_muestras_suelo" name="Número de Muestras y Duplicados (Suelos)" placeholder="Ej. 10 muestras + 2 duplicados" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="profundidades_suelo">Profundidades de Muestreo</label>
+        <p class="field-hint">Especifica las profundidades requeridas. Ej. 0.05 m, 0.30 m, 0.60 m, 2.0 m…</p>
+        <div class="input-wrap"><textarea id="profundidades_suelo" name="Profundidades de Muestreo (Suelos)" placeholder="Ej. 0.05 m, 0.30 m, 0.60 m, 2.0 m…"></textarea></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label" for="parametros_suelo">Parámetros a Analizar</label>
+        <p class="field-hint">Especifica los parámetros o contaminantes que se requieren analizar.</p>
+        <div class="input-wrap"><textarea id="parametros_suelo" name="Parámetros a Analizar (Suelos)" placeholder="Ej. Hidrocarburos totales, metales pesados, COVs, NOM-138…"></textarea></div>
+      </div>
+
+      <div class="card">
         <label class="field-label" for="obs_suelos">Observaciones Adicionales</label>
         <div class="input-wrap"><textarea id="obs_suelos" name="Observaciones (Suelos)" placeholder="Cualquier información adicional relevante…"></textarea></div>
       </div>
@@ -218,6 +242,22 @@
         <label class="field-label" for="punto_muestreo">Punto de Toma de Muestra <span class="req">*</span></label>
         <p class="field-hint">Ej. registro, tubería, río, pozo, carcamo…</p>
         <div class="input-wrap"><input type="text" id="punto_muestreo" name="Punto de Toma de Muestra" placeholder="Describa el punto de muestreo…" /></div>
+      </div>
+
+      <div class="card">
+        <label class="field-label">Origen del Agua</label>
+        <p class="field-hint">Selecciona el tipo de agua a muestrear.</p>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="Origen del Agua" value="Agua de proceso" /><label>Agua de proceso</label></label>
+          <label class="radio-item"><input type="radio" name="Origen del Agua" value="Aguas sanitarias" /><label>Aguas sanitarias</label></label>
+          <label class="radio-item"><input type="radio" name="Origen del Agua" value="Agua pluvial" /><label>Agua pluvial</label></label>
+          <label class="radio-item"><input type="radio" name="Origen del Agua" value="Cuerpo de agua superficial (río, lago, laguna)" /><label>Cuerpo de agua superficial (río, lago, laguna)</label></label>
+          <label class="radio-item"><input type="radio" name="Origen del Agua" value="Agua subterránea / pozo" /><label>Agua subterránea / pozo</label></label>
+          <label class="radio-item"><input type="radio" name="Origen del Agua" value="Otro" id="radioOtroOrigen" onchange="toggleOtroOrigen(true)" /><label>Otro</label></label>
+        </div>
+        <div id="otroOrigenWrap" class="hidden" style="margin-top:12px;">
+          <input type="text" name="Otro Origen del Agua" placeholder="Especifica el origen del agua…" />
+        </div>
       </div>
 
       <div class="card">
@@ -360,6 +400,13 @@
       document.getElementById("fecha_muestreo").value = today;
     }
 
+    // Toggle otro origen agua
+    function toggleOtroOrigen(show) {
+      const el = document.getElementById("otroOrigenWrap");
+      if (show) el.classList.remove("hidden");
+      else el.classList.add("hidden");
+    }
+
     // Toggle "Otra normativa" field
     function toggleOtraNormativa(val) {
       const card = document.getElementById("cardOtraNormativa");
@@ -382,6 +429,7 @@
       ["seccionSuelos","seccionAguas","seccionAmbiente"].forEach(id => document.getElementById(id).classList.add("hidden"));
       document.getElementById("submitSection").classList.add("hidden");
       document.getElementById("cardOtraNormativa").classList.add("hidden");
+      document.getElementById("otroOrigenWrap").classList.add("hidden");
       ["horarioMatutino","horarioVespertino","horarioNocturno"].forEach(id => document.getElementById(id).classList.add("hidden"));
       document.getElementById("matrizInput").value = "";
     }
